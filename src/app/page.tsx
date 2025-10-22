@@ -237,7 +237,7 @@ export default function Page() {
           amount: seo,
         },
         inputs.photoSessions > 0 && {
-          label: `Photography (${inputs.photoSessions} session${
+          label: `Business Development (${inputs.photoSessions} session${
             inputs.photoSessions === 1 ? "" : "s"
           })`,
           amount: photos,
