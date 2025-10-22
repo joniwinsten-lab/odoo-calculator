@@ -14,8 +14,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="relative min-h-screen text-white">
           {/* Animoitu tumma sade-tausta (canvas) */}
           <BackgroundRain
-            density={0.75}          // enemmän/vähemmän pisaroita
-            speed={1.0}             // perusnopeus
+            density={1.00}          // enemmän/vähemmän pisaroita
+            speed={1.2}             // perusnopeus
             wind={0.1}              // kevyt tuuli oikealle
             color="rgba(255,255,255,0.08)"
             background="radial-gradient(1100px 700px at 12% 10%, #2b2b2b 0%, #1a1a1a 40%, #0e0e0e 100%)"

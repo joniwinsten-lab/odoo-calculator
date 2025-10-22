@@ -165,7 +165,7 @@ export default function BackgroundRain({
 
     const onResize = () => resize();
     resize();
-
+    const respectReducedMotion = true; // voit muuttaa false, jos haluat ohittaa
     if (!reduceMotion) {
       raf = requestAnimationFrame(tick);
     } else {
@@ -196,7 +196,7 @@ export default function BackgroundRain({
     <div
       aria-hidden
       style={{
-        position: "absolute",
+        position: "fixed",   // ennen absolute
         inset: 0,
         zIndex: 0,
         background,
