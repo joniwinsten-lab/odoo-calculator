@@ -117,38 +117,18 @@ function t(lang: Lang, key: keyof typeof dict["en"]) {
  *  Pricing formulas (muokkaa vapaasti)
  *  ────────────────────────────────────────────────────────────*/
 const RATES = {
-  baseWebsite: 600,
-  ecommerceAddon: 900,
-  pageDesign: 120,
-  designComplexity: {
-    simple: 1.0,
-    standard: 1.25,
-    advanced: 1.6,
-    premium: 2.0,
-  },
-  logo: 350,
+  baseWebsite: 5000,
+  ecommerceAddon: 2000,
+  pageDesign: 500,
+  designComplexity: { simple: 1.0, standard: 1.25, advanced: 1.6, premium: 2.0 },
+  logo: 1500,
   copywritingPerPage: 60,
-  seoLevels: {
-    none: 0,
-    basic: 250,
-    standard: 450,
-    advanced: 850,
-  },
+  seoLevels: { none: 0, basic: 500, standard: 800, advanced: 1500 },
   photographySession: 220,
   multilingualPerLanguage: 180,
-  cmsTrainingPerHour: 85,
-  maintenance: {
-    none: 0,
-    basic: 49,
-    pro: 129,
-    enterprise: 299,
-  },
-  hosting: {
-    none: 0,
-    basic: 12,
-    pro: 24,
-    enterprise: 59,
-  },
+  cmsTrainingPerHour: 119,
+  maintenance: { none: 0, basic: 199, pro: 399, enterprise: 699 },
+  hosting: { none: 0, basic: 100, pro: 199, enterprise: 399 },
 };
 
 function currency(n: number): string {
