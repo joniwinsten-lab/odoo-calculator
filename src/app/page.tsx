@@ -132,7 +132,7 @@ export default function WebDesignCalculator() {
         </header>
 
         {/* LEFT: Form */}
-        <section className="bg-white rounded-3xl border border-gray-200 p-6 md:p-8 space-y-8">
+        <section className="bg-white rounded-2xl border border-gray-200 p-6 md:p-8 space-y-8">
           {/* Group: Project Type */}
           <div>
             <h2 className="text-lg font-semibold mb-4">Project type</h2>
@@ -265,7 +265,7 @@ export default function WebDesignCalculator() {
         </section>
 
         {/* RIGHT: Sticky Summary */}
-        <aside id="result" className="self-start lg:sticky lg:top-8 bg-white rounded-3xl border border-gray-200 p-6 md:p-8 shadow-sm">
+        <aside id="result" className="self-start lg:sticky lg:top-8 bg-white rounded-2xl border border-gray-200 p-6 md:p-8 shadow-sm">
           <div className="flex items-start justify-between gap-4">
             <h2 className="text-xl font-semibold">Estimate</h2>
             <span className="text-xs px-2 py-1 rounded-full bg-purple-50 text-purple-700 border border-purple-200">Instant</span>
