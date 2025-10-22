@@ -5,8 +5,6 @@ module.exports = {
     "./src/app/**/*.{js,ts,jsx,tsx}",
     "./src/components/**/*.{js,ts,jsx,tsx}",
   ],
-  theme: {
-    extend: {}, // älä overridea perusasetuksia
-  },
+  theme: { extend: {} },
   plugins: [],
-};
+}

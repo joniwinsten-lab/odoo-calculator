@@ -1,8 +1,9 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* (oma CSS tämän alle) */
+/* --- oma CSS tämän alle --- */
 
-/* Perus renderöinti */
 :root { color-scheme: dark; }
 html, body {
   padding: 0; margin: 0;
@@ -10,7 +11,7 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Tumma “vesi” tausta */
+/* Tumma aalto-tausta */
 .bg-wave-dark {
   position: relative;
   min-height: 100vh;
@@ -45,11 +46,7 @@ html, body {
   100% { transform: translate(-12%, -12%) scale(1.00) rotate(0deg); }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .bg-wave-dark::before { animation: none; }
-}
-
-/* Glass-kortti (ilman @apply) */
+/* Glass-kortti */
 .glass {
   border-radius: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.10);
@@ -58,7 +55,5 @@ html, body {
   backdrop-filter: blur(12px);
 }
 
-/* Lomake-elementtien tumma moodi */
-input[type="number"], input[type="text"], select {
-  color-scheme: dark;
-}
+/* Lomake-elementit */
+input[type="number"], input[type="text"], select { color-scheme: dark; }
