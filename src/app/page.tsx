@@ -88,7 +88,7 @@ const dict = {
     photoSessions: "Kuvaussessiot",
     totalLanguages: "Kieliä yhteensä",
     firstLangNote: "Ensimmäinen kieli sisältyy. Lisäkielet laskutetaan.",
-    cmsTraining: "CMS-koulutus (h)",
+    cmsTraining: "Koulutus (h)",
 
     carePlans: "Ylläpito",
     maintenancePlan: "Ylläpitosopimus",
@@ -98,12 +98,12 @@ const dict = {
     seeTotal: "Näytä summa",
 
     estimate: "Arvio",
-    oneOffSubtotal: "Kertaluontoinen välisumma",
+    oneOffSubtotal: "Projektikustannus",
     maintMonthly: "Ylläpito (kk)",
     hostMonthly: "Hostaus (kk)",
-    firstMonthTotal: "Ensimmäisen kuun yhteensä",
+    firstMonthTotal: "Ensimmäisen kuun hinta yhteensä",
     disclaimer:
-      "Huom: Tämä on suuntaa-antava arvio. Muokkaa kaavoja omien hintojen mukaan.",
+      "Huom: Tämä on suuntaa-antava arvio.",
 
     instant: "Heti",
   },
@@ -117,8 +117,8 @@ function t(lang: Lang, key: keyof typeof dict["en"]) {
  *  Pricing formulas (muokkaa vapaasti)
  *  ────────────────────────────────────────────────────────────*/
 const RATES = {
-  baseWebsite: 5000,
-  ecommerceAddon: 2000,
+  baseWebsite: 5900,
+  ecommerceAddon: 4500,
   pageDesign: 500,
   designComplexity: { simple: 1.0, standard: 1.25, advanced: 1.6, premium: 2.0 },
   logo: 1500,
