@@ -14,7 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <main className="relative min-h-screen text-white">
           <BackgroundRipples
-            dropsPerSecond={20}      // ↑ enemmän osumia = elävämpi pinta
+            dropsPerSecond={2}      // ↑ enemmän osumia = elävämpi pinta
             dropStrength={1.4}        // renkaiden voimakkuus
             damping={0.987}           // hitaampi vaimeneminen
             resolutionScale={0.5}     // suorituskyky/terävyys
