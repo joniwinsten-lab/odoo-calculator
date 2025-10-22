@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 /** ─────────────────────────────────────────────────────────────
  *  Lightweight i18n (built-in)
@@ -57,6 +57,10 @@ const dict = {
       "Disclaimer: This is a non-binding estimate. Adjust formulas to reflect your own rates & scope.",
 
     instant: "Instant",
+
+    includesTitle: "This website includes",
+    projectOneOff: "Project price (one-off)",
+    monthlyOngoing: "Monthly price (ongoing)",
   },
   fi: {
     title: "Verkkosivulaskuri",
@@ -106,6 +110,10 @@ const dict = {
       "Huom: Tämä on suuntaa-antava arvio.",
 
     instant: "Heti",
+
+    includesTitle: "Nämä asiat sivusto sisältää",
+    projectOneOff: "Projektin hinta (kertakustannukset)",
+    monthlyOngoing: "KK-hinta (jatkuvat kulut)",
   },
 } as const;
 
@@ -150,6 +158,17 @@ export default function Page() {
   useEffect(() => {
     if (typeof window !== "undefined") localStorage.setItem("lang", lang);
   }, [lang]);
+
+  const [showSummary, setShowSummary] = useState(false);
+  const bottomRef = useRef<HTMLDivElement | null>(null);
+
+  const handleSeeTotal = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    setShowSummary(true);
+    // pieni viive että DOM ehtii renderöityä ennen scrollausta
+    setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: "smooth" }), 0);
+  };
+
 
   // Laskurin inputit
   const [inputs, setInputs] = useState({
@@ -545,12 +564,12 @@ export default function Page() {
             >
               {t(lang, "reset")}
             </button>
-            <a
-              href="#result"
-              className="px-4 py-2 rounded-xl bg-purple-600 text-white hover:bg-purple-700 active:scale-[.99]"
-            >
-              {t(lang, "seeTotal")}
-            </a>
+            <button
+  onClick={handleSeeTotal}
+  className="px-4 py-2 rounded-xl bg-purple-600 text-white hover:bg-purple-700 active:scale-[.99]"
+>
+  {t(lang, "seeTotal")}
+</button>
           </div>
         </section>
 
@@ -615,6 +634,79 @@ export default function Page() {
             {t(lang, "disclaimer")}
           </p>
         </aside>
+        {/* BOTTOM SUMMARY (appears after clicking "Näytä summa") */}
+{showSummary && (
+  <section
+    ref={bottomRef}
+    className="lg:col-span-2 glass mt-4 p-6 md:p-8 space-y-6"
+  >
+    <div className="flex items-start justify-between gap-4">
+      <h2 className="text-xl font-semibold">{t(lang, "includesTitle")}</h2>
+      <span className="text-xs px-2 py-1 rounded-full bg-purple-500/10 text-purple-200 border border-purple-400/30">
+        {t(lang, "instant")}
+      </span>
+    </div>
+
+    {/* Sama erittelylista kuin oikealla */}
+    <ul className="space-y-2">
+      {breakdown.items.map((row, i) => (
+        <li key={i} className="flex items-baseline justify-between gap-4">
+          <span className="text-white/90">{row.label}</span>
+          <span className="font-medium">{currency(row.amount)}</span>
+        </li>
+      ))}
+    </ul>
+
+    <div className="h-px bg-white/10" />
+
+    {/* Hintajako: kertakustannus vs kk-kulut */}
+    <div className="grid md:grid-cols-3 gap-6">
+      <div className="md:col-span-2">
+        <div className="flex items-center justify-between">
+          <span className="text-white font-medium">{t(lang, "projectOneOff")}</span>
+          <span className="text-2xl font-bold">
+            {currency(breakdown.oneOffSubtotal)}
+          </span>
+        </div>
+        <p className="text-xs text-white/60 mt-1">
+          {t(lang, "oneOffSubtotal")}
+        </p>
+      </div>
+
+      <div className="space-y-2">
+        <div className="flex items-center justify-between">
+          <span className="text-white font-medium">{t(lang, "monthlyOngoing")}</span>
+          <span className="text-xl font-semibold">
+            {currency(breakdown.maintMonthly + breakdown.hostMonthly)}
+          </span>
+        </div>
+        <div className="text-sm text-white/80">
+          <div className="flex items-center justify-between">
+            <span>{t(lang, "maintMonthly")}</span>
+            <span>{currency(breakdown.maintMonthly)}</span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span>{t(lang, "hostMonthly")}</span>
+            <span>{currency(breakdown.hostMonthly)}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div className="h-px bg-white/10" />
+
+    {/* First month total (kertakustannus + kk-maksut) */}
+    <div className="flex items-center justify-between">
+      <span className="text-white font-medium">{t(lang, "firstMonthTotal")}</span>
+      <span className="text-3xl font-extrabold tracking-tight">
+        {currency(breakdown.grandTotalFirstMonth)}
+      </span>
+    </div>
+
+    <p className="text-xs text-white/60">{t(lang, "disclaimer")}</p>
+  </section>
+)}
+
       </div>
     </div>
   );
