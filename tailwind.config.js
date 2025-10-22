@@ -6,10 +6,7 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {
-      // jos haluat takaisin 3xl:n, voit lisätä sen tänne:
-      // borderRadius: { '3xl': '1.5rem' },
-    },
+    extend: {}, // älä overridea perusasetuksia
   },
   plugins: [],
 };
