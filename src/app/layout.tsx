@@ -12,20 +12,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <main className="relative min-h-screen text-white">
-          {/* Animoitu tumma sade-tausta (canvas) */}
           <BackgroundRain
-            density={1.00}          // enemmän/vähemmän pisaroita
-            speed={1.2}             // perusnopeus
-            wind={0.1}              // kevyt tuuli oikealle
-            color="rgba(255,255,255,0.08)"
-            background="radial-gradient(1100px 700px at 12% 10%, #2b2b2b 0%, #1a1a1a 40%, #0e0e0e 100%)"
-            blurPx={1.2}            // sumu/pehmeys (0 = pois)
-            flashProbability={0.018} // harvinainen salama (~1.8%/s)
-            flashColor="rgba(255,255,255,0.9)"
-            flashMaxAlpha={0.22}
+            density={1.2}
+            speed={1.2}
+            wind={0.06}
+            color="rgba(255,255,255,0.22)"
+            coreColor="rgba(255,255,255,0.85)"
+            background="radial-gradient(1100px 700px at 12% 10%, #242424 0%, #151515 45%, #0d0d0d 100%)"
+            blurPx={0}
+            flashProbability={0.03}
+            flashColor="rgba(255,255,255,0.95)"
+            flashMaxAlpha={0.28}
+            respectReducedMotion={false}  // ohita OS:n liikerajoitus testiksi
           />
-
-          {/* Sivun varsinainen sisältö */}
           <div className="relative z-10">
             {children}
           </div>
