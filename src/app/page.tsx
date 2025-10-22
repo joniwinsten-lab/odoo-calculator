@@ -89,7 +89,7 @@ const dict = {
     advancedShort: "Edistynyt",
 
     mediaLang: "Media & kielet",
-    photoSessions: "Liiketoiminnan kehitysworkshopit",
+    photoSessions: "Liiketoiminnan kehitys -workshop",
     totalLanguages: "Kieliä yhteensä",
     firstLangNote: "Ensimmäinen kieli sisältyy. Lisäkielet laskutetaan.",
     cmsTraining: "Koulutus (h)",
@@ -132,7 +132,7 @@ const RATES = {
   logo: 1500, // hinta mikäli autamme logon suunnittelussa
   copywritingPerPage: 60, // Copywriting avustamisen hinta per sivu
   seoLevels: { none: 0, basic: 500, standard: 800, advanced: 1500 }, // SEO toimintojen 4 tason hinnat
-  photographySession: 220, // Keksitäänkö joku lisäpalvelu mitä voisi ostaa?
+  photographySession: 750, // Keksitäänkö joku lisäpalvelu mitä voisi ostaa?
   multilingualPerLanguage: 180, // hinta per kieliversio?
   cmsTrainingPerHour: 119, // Koulutuksen hinta per tunti
   maintenance: { none: 0, basic: 199, pro: 399, enterprise: 699 }, // Ylläpidon hinta, paketit
