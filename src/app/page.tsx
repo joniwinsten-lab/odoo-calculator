@@ -64,7 +64,7 @@ const dict = {
       "Valitse tarpeet ja saat arvion heti. Hinnoittelulogiikkaa voi muokata koodista.",
 
     projectType: "Projektin tyyppi",
-    informational: "Info-sivusto",
+    informational: "Verkkosivusto",
     ecommerce: "Verkkokauppa",
 
     sizeComplexity: "Koko & kompleksisuus",
