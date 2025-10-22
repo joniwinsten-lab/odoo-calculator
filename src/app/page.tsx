@@ -15,7 +15,7 @@ import React, { useMemo, useState } from "react";
 // -----------------
 // Tweak these numbers to your actual business logic.
 const RATES = {
-  baseWebsite: 12600,           // base price for a simple website
+  baseWebsite: 600,           // base price for a simple website
   ecommerceAddon: 900,        // add-on if e-commerce is selected
   pageDesign: 120,            // per page design/implementation
   designComplexity: {         // multiplier for complexity
@@ -124,15 +124,15 @@ export default function WebDesignCalculator() {
   });
 
   return (
-    <div className="min-h-screen w-full bg-gray-50 flex flex-col items-center py-10 px-4">
+    <div className="min-h-screen w-full bg-wave-dark flex flex-col items-center py-10 px-4 text-white">
       <div className="max-w-6xl w-full grid lg:grid-cols-[1fr_420px] gap-8">
         <header className="lg:col-span-2">
           <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">Website Quote Calculator</h1>
-          <p className="text-gray-600 mt-2">Select your needs to get an instant estimate. Pricing logic is adjustable in code.</p>
+          <p className="text-gray-300 mt-2">Select your needs to get an instant estimate. Pricing logic is adjustable in code.</p>
         </header>
 
         {/* LEFT: Form */}
-        <section className="bg-white rounded-2xl border border-gray-200 p-6 md:p-8 space-y-8">
+        <section className="rounded-2xl border border-white/10 bg-white/10 backdrop-blur-md p-6 md:p-8 space-y-8">
           {/* Group: Project Type */}
           <div>
             <h2 className="text-lg font-semibold mb-4">Project type</h2>
@@ -147,8 +147,8 @@ export default function WebDesignCalculator() {
                   className={
                     `px-4 py-2 rounded-full border text-sm transition ${
                       inputs.websiteType === opt.key
-                        ? "border-purple-600 bg-purple-50 text-purple-700"
-                        : "border-gray-300 bg-white hover:bg-gray-50"
+                        ? "border-purple-400 bg-purple-300/20 text-purple-200"
+                        : "border-white/20 bg-white/10 hover:bg-white/20"
                     }`
                   }
                 >{opt.label}</button>
@@ -159,7 +159,7 @@ export default function WebDesignCalculator() {
           {/* Group: Size & complexity */}
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <label className="text-sm text-gray-700">Number of pages</label>
+              <label className="text-sm text-gray-200">Number of pages</label>
               <input
                 type="range"
                 min={1}
@@ -168,11 +168,11 @@ export default function WebDesignCalculator() {
                 onChange={(e) => update({ pages: Number(e.target.value) })}
                 className="w-full accent-purple-600"
               />
-              <div className="mt-1 text-sm text-gray-600">{inputs.pages} page{inputs.pages===1?"":"s"}</div>
+              <div className="mt-1 text-sm text-gray-300">{inputs.pages} page{inputs.pages===1?"":"s"}</div>
             </div>
 
             <div>
-              <label className="text-sm text-gray-700">Design complexity</label>
+              <label className="text-sm text-gray-200">Design complexity</label>
               <div className="mt-2 grid grid-cols-2 gap-2">
                 {(["simple","standard","advanced","premium"] as const).map(key => (
                   <button
@@ -181,8 +181,8 @@ export default function WebDesignCalculator() {
                     className={
                       `px-3 py-2 rounded-xl border text-sm capitalize ${
                         inputs.complexity === key
-                          ? "border-purple-600 bg-purple-50 text-purple-700"
-                          : "border-gray-300 bg-white hover:bg-gray-50"
+                          ? "border-purple-400 bg-purple-300/20 text-purple-200"
+                          : "border-white/20 bg-white/10 hover:bg-white/20"
                       }`
                     }
                   >{key}</button>
@@ -194,21 +194,21 @@ export default function WebDesignCalculator() {
           {/* Group: Branding & content */}
           <div className="grid md:grid-cols-3 gap-6">
             <div className="flex items-center gap-3">
-              <input id="logo" type="checkbox" className="size-4 accent-purple-600" checked={inputs.logoNeeded} onChange={(e)=>update({logoNeeded:e.target.checked})} />
-              <label htmlFor="logo" className="text-sm text-gray-700">Include logo design</label>
+              <input id="logo" type="checkbox" className=\"w-4 h-4 accent-purple-400" checked={inputs.logoNeeded} onChange={(e)=>update({logoNeeded:e.target.checked})} />
+              <label htmlFor="logo" className="text-sm text-gray-200">Include logo design</label>
             </div>
             <div>
-              <label className="text-sm text-gray-700">Copywriting pages</label>
-              <input type="number" min={0} value={inputs.copywritingPages} onChange={(e)=>update({copywritingPages:Number(e.target.value)})} className="mt-1 w-full border rounded-xl px-3 py-2" />
+              <label className="text-sm text-gray-200">Copywriting pages</label>
+              <input type="number" min={0} value={inputs.copywritingPages} onChange={(e)=>update({copywritingPages:Number(e.target.value)})} className="mt-1 w-full border border-white/20 bg-white/5 rounded-xl px-3 py-2 placeholder:text-gray-400" />
             </div>
             <div>
-              <label className="text-sm text-gray-700">SEO level</label>
+              <label className="text-sm text-gray-200">SEO level</label>
               <div className="mt-2 grid grid-cols-2 gap-2">
                 {(["none","basic","standard","advanced"] as const).map(key => (
                   <button
                     key={key}
                     onClick={() => update({ seoLevel: key })}
-                    className={`px-3 py-2 rounded-xl border text-sm capitalize ${inputs.seoLevel===key?"border-purple-600 bg-purple-50 text-purple-700":"border-gray-300 bg-white hover:bg-gray-50"}`}
+                    className={`px-3 py-2 rounded-xl border text-sm capitalize ${inputs.seoLevel===key?"border-purple-400 bg-purple-300/20 text-purple-200":"border-white/20 bg-white/10 hover:bg-white/20"}`}
                   >{key}</button>
                 ))}
               </div>
@@ -218,40 +218,40 @@ export default function WebDesignCalculator() {
           {/* Group: Media & languages */}
           <div className="grid md:grid-cols-3 gap-6">
             <div>
-              <label className="text-sm text-gray-700">Photography sessions</label>
-              <input type="number" min={0} value={inputs.photoSessions} onChange={(e)=>update({photoSessions:Number(e.target.value)})} className="mt-1 w-full border rounded-xl px-3 py-2" />
+              <label className="text-sm text-gray-200">Photography sessions</label>
+              <input type="number" min={0} value={inputs.photoSessions} onChange={(e)=>update({photoSessions:Number(e.target.value)})} className="mt-1 w-full border border-white/20 bg-white/5 rounded-xl px-3 py-2 placeholder:text-gray-400" />
             </div>
             <div>
-              <label className="text-sm text-gray-700">Total languages</label>
-              <input type="number" min={1} value={inputs.languages} onChange={(e)=>update({languages:Number(e.target.value)})} className="mt-1 w-full border rounded-xl px-3 py-2" />
-              <p className="text-xs text-gray-500 mt-1">First language included. Extras billed.</p>
+              <label className="text-sm text-gray-200">Total languages</label>
+              <input type="number" min={1} value={inputs.languages} onChange={(e)=>update({languages:Number(e.target.value)})} className="mt-1 w-full border border-white/20 bg-white/5 rounded-xl px-3 py-2 placeholder:text-gray-400" />
+              <p className="text-xs text-gray-300 mt-1">First language included. Extras billed.</p>
             </div>
             <div>
-              <label className="text-sm text-gray-700">CMS training (hours)</label>
-              <input type="number" min={0} value={inputs.trainingHours} onChange={(e)=>update({trainingHours:Number(e.target.value)})} className="mt-1 w-full border rounded-xl px-3 py-2" />
+              <label className="text-sm text-gray-200">CMS training (hours)</label>
+              <input type="number" min={0} value={inputs.trainingHours} onChange={(e)=>update({trainingHours:Number(e.target.value)})} className="mt-1 w-full border border-white/20 bg-white/5 rounded-xl px-3 py-2 placeholder:text-gray-400" />
             </div>
           </div>
 
           {/* Group: Care plans */}
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <label className="text-sm text-gray-700">Maintenance plan</label>
+              <label className="text-sm text-gray-200">Maintenance plan</label>
               <div className="mt-2 flex flex-wrap gap-2">
                 {Object.keys(RATES.maintenance).map((key) => (
                   <button key={key}
                     onClick={()=>update({maintenance: key as any})}
-                    className={`px-3 py-2 rounded-full border text-sm capitalize ${inputs.maintenance===key?"border-purple-600 bg-purple-50 text-purple-700":"border-gray-300 bg-white hover:bg-gray-50"}`}
+                    className={`px-3 py-2 rounded-full border text-sm capitalize ${inputs.maintenance===key?"border-purple-400 bg-purple-300/20 text-purple-200":"border-white/20 bg-white/10 hover:bg-white/20"}`}
                   >{key}</button>
                 ))}
               </div>
             </div>
             <div>
-              <label className="text-sm text-gray-700">Hosting</label>
+              <label className="text-sm text-gray-200">Hosting</label>
               <div className="mt-2 flex flex-wrap gap-2">
                 {Object.keys(RATES.hosting).map((key) => (
                   <button key={key}
                     onClick={()=>update({hosting: key as any})}
-                    className={`px-3 py-2 rounded-full border text-sm capitalize ${inputs.hosting===key?"border-purple-600 bg-purple-50 text-purple-700":"border-gray-300 bg-white hover:bg-gray-50"}`}
+                    className={`px-3 py-2 rounded-full border text-sm capitalize ${inputs.hosting===key?"border-purple-400 bg-purple-300/20 text-purple-200":"border-white/20 bg-white/10 hover:bg-white/20"}`}
                   >{key}</button>
                 ))}
               </div>
@@ -259,13 +259,13 @@ export default function WebDesignCalculator() {
           </div>
 
           <div className="flex gap-3 pt-2">
-            <button onClick={reset} className="px-4 py-2 rounded-xl border hover:bg-gray-50 active:scale-[.99]">Reset</button>
-            <a href="#result" className="px-4 py-2 rounded-xl bg-purple-600 text-white hover:bg-purple-700 active:scale-[.99]">See total</a>
+            <button onClick={reset} className="px-4 py-2 rounded-xl border border-white/20 bg-white/10 hover:bg-white/20 active:scale-[.99]">Reset</button>
+            <a href="#result" className="px-4 py-2 rounded-xl bg-purple-600 text-white hover:bg-purple-500 active:scale-[.99]">See total</a>
           </div>
         </section>
 
         {/* RIGHT: Sticky Summary */}
-        <aside id="result" className="self-start lg:sticky lg:top-8 bg-white rounded-2xl border border-gray-200 p-6 md:p-8 shadow-sm">
+        <aside id="result" className="self-start lg:sticky lg:top-8 rounded-2xl border border-white/10 bg-white/10 backdrop-blur-md p-6 md:p-8 shadow-sm">
           <div className="flex items-start justify-between gap-4">
             <h2 className="text-xl font-semibold">Estimate</h2>
             <span className="text-xs px-2 py-1 rounded-full bg-purple-50 text-purple-700 border border-purple-200">Instant</span>
@@ -274,20 +274,20 @@ export default function WebDesignCalculator() {
           <ul className="mt-4 space-y-2">
             {breakdown.items.map((row, i) => (
               <li key={i} className="flex items-baseline justify-between gap-4">
-                <span className="text-gray-700">{row.label}</span>
+                <span className="text-gray-200">{row.label}</span>
                 <span className="font-medium">{currency(row.amount)}</span>
               </li>
             ))}
           </ul>
 
-          <div className="h-px bg-gray-200 my-6" />
+          <div className="h-px bg-white/10 my-6" />
 
           <div className="flex items-center justify-between">
-            <span className="text-gray-800 font-medium">One‑off subtotal</span>
+            <span className="text-gray-100 font-medium">One‑off subtotal</span>
             <span className="text-2xl font-bold">{currency(breakdown.oneOffSubtotal)}</span>
           </div>
 
-          <div className="mt-4 space-y-1 text-sm text-gray-700">
+          <div className="mt-4 space-y-1 text-sm text-gray-200">
             <div className="flex items-center justify-between">
               <span>Maintenance (monthly)</span>
               <span>{currency(breakdown.maintMonthly)}</span>
@@ -298,17 +298,17 @@ export default function WebDesignCalculator() {
             </div>
           </div>
 
-          <div className="h-px bg-gray-200 my-6" />
+          <div className="h-px bg-white/10 my-6" />
 
           <div className="flex items-center justify-between">
-            <span className="text-gray-800 font-medium">First month total</span>
+            <span className="text-gray-100 font-medium">First month total</span>
             <span className="text-3xl font-extrabold tracking-tight">{currency(breakdown.grandTotalFirstMonth)}</span>
           </div>
 
-          <p className="text-xs text-gray-500 mt-4">Disclaimer: This is a non‑binding estimate. Adjust formulas to reflect your own rates & scope.</p>
+          <p className="text-xs text-gray-300 mt-4">Disclaimer: This is a non‑binding estimate. Adjust formulas to reflect your own rates & scope.</p>
         </aside>
 
-        <footer className="lg:col-span-2 text-center text-sm text-gray-500 pt-2">
+        <footer className="lg:col-span-2 text-center text-sm text-gray-300 pt-2">
           <p>
             Built as an Odoo‑style calculator demo. You can theme it further via Tailwind config (use brand purple accents).
           </p>

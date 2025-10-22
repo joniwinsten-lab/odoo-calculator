@@ -3,10 +3,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Perusfontti ja smooth rendering (valinnainen) */
-:root {
-  color-scheme: dark;
-}
+/* Perus renderöinti */
+:root { color-scheme: dark; }
 html, body {
   padding: 0;
   margin: 0;
@@ -22,7 +20,7 @@ html, body {
   min-height: 100vh;
   background: radial-gradient(1200px 800px at 10% 10%, #2a2a2a 0%, #1a1a1a 40%, #121212 100%);
   overflow: hidden;
-  isolation: isolate; /* keeps pseudo-elements behind content */
+  isolation: isolate;
 }
 
 /* moving soft highlight (like water shimmer) */
@@ -44,8 +42,7 @@ html, body {
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(70% 60% at 50% 40%, rgba(0,0,0,0.20) 0%, rgba(0,0,0,0.55) 100%);
+  background: radial-gradient(70% 60% at 50% 40%, rgba(0,0,0,0.20) 0%, rgba(0,0,0,0.55) 100%);
   z-index: -1;
 }
 
@@ -60,20 +57,18 @@ html, body {
 
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .bg-wave-dark::before {
-    animation: none;
-  }
+  .bg-wave-dark::before { animation: none; }
 }
 
 /* -----------------------------
    “Glass card” helper class
-   (voit käyttää tätä lyhentämään className-ketjuja)
    ----------------------------- */
 .glass {
-  @apply rounded-3xl border border-white/10 bg-white/10 backdrop-blur-md;
+  /* käytetään vain yleisiä util-tyylejä */
+  @apply rounded-2xl border border-white/10 bg-white/10 backdrop-blur-md;
 }
 
-/* Form elements on dark bg */
+/* Pienet parannukset syötekentille tummalla */
 input[type="number"], input[type="text"], select {
   color-scheme: dark;
 }
