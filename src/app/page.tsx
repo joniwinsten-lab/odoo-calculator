@@ -36,7 +36,7 @@ const dict = {
     advancedShort: "Advanced",
 
     mediaLang: "Media & languages",
-    photoSessions: "Photography sessions",
+    photoSessions: "Business development sessions",
     totalLanguages: "Total languages",
     firstLangNote: "First language included. Extras billed.",
     cmsTraining: "CMS training (hours)",
@@ -89,7 +89,7 @@ const dict = {
     advancedShort: "Edistynyt",
 
     mediaLang: "Media & kielet",
-    photoSessions: "Kuvaussessiot",
+    photoSessions: "Liiketoiminnan kehitysworkshopit",
     totalLanguages: "Kieliä yhteensä",
     firstLangNote: "Ensimmäinen kieli sisältyy. Lisäkielet laskutetaan.",
     cmsTraining: "Koulutus (h)",
@@ -125,18 +125,18 @@ function t(lang: Lang, key: keyof typeof dict["en"]) {
  *  Pricing formulas (muokkaa vapaasti)
  *  ────────────────────────────────────────────────────────────*/
 const RATES = {
-  baseWebsite: 5900,
-  ecommerceAddon: 4500,
-  pageDesign: 500,
-  designComplexity: { simple: 1.0, standard: 1.25, advanced: 1.6, premium: 2.0 },
-  logo: 1500,
-  copywritingPerPage: 60,
-  seoLevels: { none: 0, basic: 500, standard: 800, advanced: 1500 },
-  photographySession: 220,
-  multilingualPerLanguage: 180,
-  cmsTrainingPerHour: 119,
-  maintenance: { none: 0, basic: 199, pro: 399, enterprise: 699 },
-  hosting: { none: 0, basic: 100, pro: 199, enterprise: 399 },
+  baseWebsite: 5900, // Pohjahinta verkkosivulle
+  ecommerceAddon: 4500, // Lisähinta jos verkkokauppa
+  pageDesign: 500, // hinta per sivu, yhteystiedot yms
+  designComplexity: { simple: 1.0, standard: 1.25, advanced: 1.6, premium: 2.0 }, // kerroin, kun valitaan kompleksisuus
+  logo: 1500, // hinta mikäli autamme logon suunnittelussa
+  copywritingPerPage: 60, // Copywriting avustamisen hinta per sivu
+  seoLevels: { none: 0, basic: 500, standard: 800, advanced: 1500 }, // SEO toimintojen 4 tason hinnat
+  photographySession: 220, // Keksitäänkö joku lisäpalvelu mitä voisi ostaa?
+  multilingualPerLanguage: 180, // hinta per kieliversio?
+  cmsTrainingPerHour: 119, // Koulutuksen hinta per tunti
+  maintenance: { none: 0, basic: 199, pro: 399, enterprise: 699 }, // Ylläpidon hinta, paketit
+  hosting: { none: 0, basic: 100, pro: 199, enterprise: 399 }, // Hostaushinta
 };
 
 function currency(n: number): string {
