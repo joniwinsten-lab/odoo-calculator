@@ -1,6 +1,7 @@
+// src/app/layout.tsx
 import "./globals.css";
 import type { Metadata } from "next";
-import BackgroundRain from "@/components/BackgroundRain";
+import BackgroundRipples from "@/components/BackgroundRipples";
 
 export const metadata: Metadata = {
   title: "Website Quote Calculator",
@@ -12,18 +13,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <main className="relative min-h-screen text-white">
-          <BackgroundRain
-            density={1.2}
-            speed={1.2}
-            wind={0.06}
-            color="rgba(255,255,255,0.22)"
-            coreColor="rgba(255,255,255,0.85)"
-            background="radial-gradient(1100px 700px at 12% 10%, #242424 0%, #151515 45%, #0d0d0d 100%)"
-            blurPx={0}
-            flashProbability={0.03}
-            flashColor="rgba(255,255,255,0.95)"
-            flashMaxAlpha={0.28}
-            respectReducedMotion={false}  // ohita OS:n liikerajoitus testiksi
+          <BackgroundRipples
+            dropsPerSecond={140}      // ↑ enemmän osumia = elävämpi pinta
+            dropStrength={1.4}        // renkaiden voimakkuus
+            damping={0.987}           // hitaampi vaimeneminen
+            resolutionScale={0.5}     // suorituskyky/terävyys
+            tint="#101010"            // tumma sävylasi
+            background="radial-gradient(1100px 700px at 12% 10%, #242424 0%, #141414 45%, #0c0c0c 100%)"
+            lightDir={[0.6, -0.8]}    // valo yläoikealta
+            respectReducedMotion={true}
           />
           <div className="relative z-10">
             {children}
