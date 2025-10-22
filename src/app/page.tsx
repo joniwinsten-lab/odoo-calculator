@@ -1,5 +1,6 @@
 "use client";
 import React, { useMemo, useState } from "react";
+<p className="text-red-400">Tailwind test: if this is red, Tailwind works.</p>
 
 function currency(n: number): string {
   return new Intl.NumberFormat(undefined, { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n);
