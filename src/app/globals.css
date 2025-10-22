@@ -11,6 +11,9 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Testiluokka, jolla todistetaan Tailwind on päällä */
+.tw-proof { @apply text-red-500 font-bold; }
+
 /* Tumma aalto-tausta */
 .bg-wave-dark {
   position: relative;
