@@ -194,7 +194,7 @@ export default function WebDesignCalculator() {
           {/* Group: Branding & content */}
           <div className="grid md:grid-cols-3 gap-6">
             <div className="flex items-center gap-3">
-              <input id="logo" type="checkbox" className=\"w-4 h-4 accent-purple-400" checked={inputs.logoNeeded} onChange={(e)=>update({logoNeeded:e.target.checked})} />
+              <input id="logo" type="checkbox" className="w-4 h-4 accent-purple-400" checked={inputs.logoNeeded} onChange={(e)=>update({logoNeeded:e.target.checked})} />
               <label htmlFor="logo" className="text-sm text-gray-200">Include logo design</label>
             </div>
             <div>
