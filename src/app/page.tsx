@@ -3,19 +3,20 @@ import React, { useMemo, useState } from "react";
 
 // Web Design Price Calculator – Odoo-style clone (customizable formulas)
 // --------------------------------------------------------------
-// How to use in Next.js (App Router):
-// 1) Create a new Next.js project: npx create-next-app@latest my-calculator --ts
-// 2) Add Tailwind (follow Next.js + Tailwind guide) or use a CSS reset. This file uses Tailwind classes.
-// 3) Create app/page.tsx and paste this component there OR import it into your page.
-// 4) Deploy to Vercel. Adjust FORMULAS below to match your pricing.
+// Notes:
+// - This variant aims to mimic the Odoo calculator layout & feel:
+//   left column with grouped sections + right sticky summary card,
+//   pill radios, subtle borders, large total with badge-like hints.
+// - Uses a brand-ish accent similar to Odoo (purple tone) via Tailwind classes.
+//   Adjust the "accent" classes below if you have a Tailwind theme.
 
 // -----------------
 // PRICING FORMULAS
 // -----------------
 // Tweak these numbers to your actual business logic.
 const RATES = {
-  baseWebsite: 2600,           // base price for a simple website
-  ecommerceAddon: 2900,        // add-on if e-commerce is selected
+  baseWebsite: 12600,           // base price for a simple website
+  ecommerceAddon: 900,        // add-on if e-commerce is selected
   pageDesign: 120,            // per page design/implementation
   designComplexity: {         // multiplier for complexity
     simple: 1.0,
@@ -124,176 +125,153 @@ export default function WebDesignCalculator() {
 
   return (
     <div className="min-h-screen w-full bg-gray-50 flex flex-col items-center py-10 px-4">
-      <div className="max-w-5xl w-full grid lg:grid-cols-2 gap-6">
+      <div className="max-w-6xl w-full grid lg:grid-cols-[1fr_420px] gap-8">
         <header className="lg:col-span-2">
-          <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">Web Design Price Calculator</h1>
-          <p className="text-gray-600 mt-2">Select options to estimate your project cost. Adjust formulas in code to match your pricing.</p>
+          <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">Website Quote Calculator</h1>
+          <p className="text-gray-600 mt-2">Select your needs to get an instant estimate. Pricing logic is adjustable in code.</p>
         </header>
 
         {/* LEFT: Form */}
-        <section className="bg-white rounded-2xl shadow p-5 md:p-6">
-          <h2 className="text-xl font-semibold mb-4">Project details</h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Website type */}
-            <div className="flex flex-col">
-              <label className="text-sm text-gray-700 mb-1">Website type</label>
-              <select
-                className="border rounded-xl px-3 py-2"
-                value={inputs.websiteType}
-                onChange={(e) => update({ websiteType: e.target.value as any })}
-              >
-                <option value="basic">Informational</option>
-                <option value="ecommerce">E‑commerce</option>
-              </select>
-            </div>
-
-            {/* Pages */}
-            <div className="flex flex-col">
-              <label className="text-sm text-gray-700 mb-1">Number of pages</label>
-              <input
-                type="number"
-                min={1}
-                className="border rounded-xl px-3 py-2"
-                value={inputs.pages}
-                onChange={(e) => update({ pages: Number(e.target.value) })}
-              />
-            </div>
-
-            {/* Complexity */}
-            <div className="flex flex-col">
-              <label className="text-sm text-gray-700 mb-1">Design complexity</label>
-              <select
-                className="border rounded-xl px-3 py-2"
-                value={inputs.complexity}
-                onChange={(e) => update({ complexity: e.target.value as any })}
-              >
-                <option value="simple">Simple</option>
-                <option value="standard">Standard</option>
-                <option value="advanced">Advanced</option>
-                <option value="premium">Premium</option>
-              </select>
-            </div>
-
-            {/* Logo */}
-            <div className="flex items-center gap-3 mt-6">
-              <input
-                id="logo"
-                type="checkbox"
-                className="size-4"
-                checked={inputs.logoNeeded}
-                onChange={(e) => update({ logoNeeded: e.target.checked })}
-              />
-              <label htmlFor="logo" className="text-sm text-gray-700">Include logo design</label>
-            </div>
-
-            {/* Copywriting */}
-            <div className="flex flex-col">
-              <label className="text-sm text-gray-700 mb-1">Copywriting pages</label>
-              <input
-                type="number"
-                min={0}
-                className="border rounded-xl px-3 py-2"
-                value={inputs.copywritingPages}
-                onChange={(e) => update({ copywritingPages: Number(e.target.value) })}
-              />
-            </div>
-
-            {/* SEO */}
-            <div className="flex flex-col">
-              <label className="text-sm text-gray-700 mb-1">SEO level</label>
-              <select
-                className="border rounded-xl px-3 py-2"
-                value={inputs.seoLevel}
-                onChange={(e) => update({ seoLevel: e.target.value as any })}
-              >
-                <option value="none">None</option>
-                <option value="basic">Basic</option>
-                <option value="standard">Standard</option>
-                <option value="advanced">Advanced</option>
-              </select>
-            </div>
-
-            {/* Photography */}
-            <div className="flex flex-col">
-              <label className="text-sm text-gray-700 mb-1">Photography sessions</label>
-              <input
-                type="number"
-                min={0}
-                className="border rounded-xl px-3 py-2"
-                value={inputs.photoSessions}
-                onChange={(e) => update({ photoSessions: Number(e.target.value) })}
-              />
-            </div>
-
-            {/* Languages */}
-            <div className="flex flex-col">
-              <label className="text-sm text-gray-700 mb-1">Total languages</label>
-              <input
-                type="number"
-                min={1}
-                className="border rounded-xl px-3 py-2"
-                value={inputs.languages}
-                onChange={(e) => update({ languages: Number(e.target.value) })}
-              />
-            </div>
-
-            {/* Training */}
-            <div className="flex flex-col">
-              <label className="text-sm text-gray-700 mb-1">CMS training (hours)</label>
-              <input
-                type="number"
-                min={0}
-                className="border rounded-xl px-3 py-2"
-                value={inputs.trainingHours}
-                onChange={(e) => update({ trainingHours: Number(e.target.value) })}
-              />
-            </div>
-
-            {/* Maintenance */}
-            <div className="flex flex-col">
-              <label className="text-sm text-gray-700 mb-1">Maintenance plan (monthly)</label>
-              <select
-                className="border rounded-xl px-3 py-2"
-                value={inputs.maintenance}
-                onChange={(e) => update({ maintenance: e.target.value as any })}
-              >
-                <option value="none">None</option>
-                <option value="basic">Basic</option>
-                <option value="pro">Pro</option>
-                <option value="enterprise">Enterprise</option>
-              </select>
-            </div>
-
-            {/* Hosting */}
-            <div className="flex flex-col">
-              <label className="text-sm text-gray-700 mb-1">Hosting (monthly)</label>
-              <select
-                className="border rounded-xl px-3 py-2"
-                value={inputs.hosting}
-                onChange={(e) => update({ hosting: e.target.value as any })}
-              >
-                <option value="none">None</option>
-                <option value="basic">Basic</option>
-                <option value="pro">Pro</option>
-                <option value="enterprise">Enterprise</option>
-              </select>
+        <section className="bg-white rounded-3xl border border-gray-200 p-6 md:p-8 space-y-8">
+          {/* Group: Project Type */}
+          <div>
+            <h2 className="text-lg font-semibold mb-4">Project type</h2>
+            <div className="flex flex-wrap gap-2">
+              {[
+                { key: "basic", label: "Informational" },
+                { key: "ecommerce", label: "E‑commerce" },
+              ].map(opt => (
+                <button
+                  key={opt.key}
+                  onClick={() => update({ websiteType: opt.key as any })}
+                  className={
+                    `px-4 py-2 rounded-full border text-sm transition ${
+                      inputs.websiteType === opt.key
+                        ? "border-purple-600 bg-purple-50 text-purple-700"
+                        : "border-gray-300 bg-white hover:bg-gray-50"
+                    }`
+                  }
+                >{opt.label}</button>
+              ))}
             </div>
           </div>
 
-          <div className="flex gap-3 mt-6">
+          {/* Group: Size & complexity */}
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <label className="text-sm text-gray-700">Number of pages</label>
+              <input
+                type="range"
+                min={1}
+                max={30}
+                value={inputs.pages}
+                onChange={(e) => update({ pages: Number(e.target.value) })}
+                className="w-full accent-purple-600"
+              />
+              <div className="mt-1 text-sm text-gray-600">{inputs.pages} page{inputs.pages===1?"":"s"}</div>
+            </div>
+
+            <div>
+              <label className="text-sm text-gray-700">Design complexity</label>
+              <div className="mt-2 grid grid-cols-2 gap-2">
+                {(["simple","standard","advanced","premium"] as const).map(key => (
+                  <button
+                    key={key}
+                    onClick={() => update({ complexity: key })}
+                    className={
+                      `px-3 py-2 rounded-xl border text-sm capitalize ${
+                        inputs.complexity === key
+                          ? "border-purple-600 bg-purple-50 text-purple-700"
+                          : "border-gray-300 bg-white hover:bg-gray-50"
+                      }`
+                    }
+                  >{key}</button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Group: Branding & content */}
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="flex items-center gap-3">
+              <input id="logo" type="checkbox" className="size-4 accent-purple-600" checked={inputs.logoNeeded} onChange={(e)=>update({logoNeeded:e.target.checked})} />
+              <label htmlFor="logo" className="text-sm text-gray-700">Include logo design</label>
+            </div>
+            <div>
+              <label className="text-sm text-gray-700">Copywriting pages</label>
+              <input type="number" min={0} value={inputs.copywritingPages} onChange={(e)=>update({copywritingPages:Number(e.target.value)})} className="mt-1 w-full border rounded-xl px-3 py-2" />
+            </div>
+            <div>
+              <label className="text-sm text-gray-700">SEO level</label>
+              <div className="mt-2 grid grid-cols-2 gap-2">
+                {(["none","basic","standard","advanced"] as const).map(key => (
+                  <button
+                    key={key}
+                    onClick={() => update({ seoLevel: key })}
+                    className={`px-3 py-2 rounded-xl border text-sm capitalize ${inputs.seoLevel===key?"border-purple-600 bg-purple-50 text-purple-700":"border-gray-300 bg-white hover:bg-gray-50"}`}
+                  >{key}</button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Group: Media & languages */}
+          <div className="grid md:grid-cols-3 gap-6">
+            <div>
+              <label className="text-sm text-gray-700">Photography sessions</label>
+              <input type="number" min={0} value={inputs.photoSessions} onChange={(e)=>update({photoSessions:Number(e.target.value)})} className="mt-1 w-full border rounded-xl px-3 py-2" />
+            </div>
+            <div>
+              <label className="text-sm text-gray-700">Total languages</label>
+              <input type="number" min={1} value={inputs.languages} onChange={(e)=>update({languages:Number(e.target.value)})} className="mt-1 w-full border rounded-xl px-3 py-2" />
+              <p className="text-xs text-gray-500 mt-1">First language included. Extras billed.</p>
+            </div>
+            <div>
+              <label className="text-sm text-gray-700">CMS training (hours)</label>
+              <input type="number" min={0} value={inputs.trainingHours} onChange={(e)=>update({trainingHours:Number(e.target.value)})} className="mt-1 w-full border rounded-xl px-3 py-2" />
+            </div>
+          </div>
+
+          {/* Group: Care plans */}
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <label className="text-sm text-gray-700">Maintenance plan</label>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {Object.keys(RATES.maintenance).map((key) => (
+                  <button key={key}
+                    onClick={()=>update({maintenance: key as any})}
+                    className={`px-3 py-2 rounded-full border text-sm capitalize ${inputs.maintenance===key?"border-purple-600 bg-purple-50 text-purple-700":"border-gray-300 bg-white hover:bg-gray-50"}`}
+                  >{key}</button>
+                ))}
+              </div>
+            </div>
+            <div>
+              <label className="text-sm text-gray-700">Hosting</label>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {Object.keys(RATES.hosting).map((key) => (
+                  <button key={key}
+                    onClick={()=>update({hosting: key as any})}
+                    className={`px-3 py-2 rounded-full border text-sm capitalize ${inputs.hosting===key?"border-purple-600 bg-purple-50 text-purple-700":"border-gray-300 bg-white hover:bg-gray-50"}`}
+                  >{key}</button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="flex gap-3 pt-2">
             <button onClick={reset} className="px-4 py-2 rounded-xl border hover:bg-gray-50 active:scale-[.99]">Reset</button>
-            <a
-              href="#result"
-              className="px-4 py-2 rounded-xl bg-black text-white hover:opacity-90 active:scale-[.99]"
-            >See total</a>
+            <a href="#result" className="px-4 py-2 rounded-xl bg-purple-600 text-white hover:bg-purple-700 active:scale-[.99]">See total</a>
           </div>
         </section>
 
-        {/* RIGHT: Summary */}
-        <aside id="result" className="bg-white rounded-2xl shadow p-5 md:p-6">
-          <h2 className="text-xl font-semibold mb-4">Estimate</h2>
-          <ul className="space-y-2">
+        {/* RIGHT: Sticky Summary */}
+        <aside id="result" className="self-start lg:sticky lg:top-8 bg-white rounded-3xl border border-gray-200 p-6 md:p-8 shadow-sm">
+          <div className="flex items-start justify-between gap-4">
+            <h2 className="text-xl font-semibold">Estimate</h2>
+            <span className="text-xs px-2 py-1 rounded-full bg-purple-50 text-purple-700 border border-purple-200">Instant</span>
+          </div>
+
+          <ul className="mt-4 space-y-2">
             {breakdown.items.map((row, i) => (
               <li key={i} className="flex items-baseline justify-between gap-4">
                 <span className="text-gray-700">{row.label}</span>
@@ -302,11 +280,11 @@ export default function WebDesignCalculator() {
             ))}
           </ul>
 
-          <div className="h-px bg-gray-200 my-4" />
+          <div className="h-px bg-gray-200 my-6" />
 
           <div className="flex items-center justify-between">
             <span className="text-gray-800 font-medium">One‑off subtotal</span>
-            <span className="text-xl font-semibold">{currency(breakdown.oneOffSubtotal)}</span>
+            <span className="text-2xl font-bold">{currency(breakdown.oneOffSubtotal)}</span>
           </div>
 
           <div className="mt-4 space-y-1 text-sm text-gray-700">
@@ -320,20 +298,19 @@ export default function WebDesignCalculator() {
             </div>
           </div>
 
-          <div className="h-px bg-gray-200 my-4" />
+          <div className="h-px bg-gray-200 my-6" />
 
           <div className="flex items-center justify-between">
-            <span className="text-gray-800 font-medium">First month total (incl. monthly)</span>
-            <span className="text-2xl font-bold">{currency(breakdown.grandTotalFirstMonth)}</span>
+            <span className="text-gray-800 font-medium">First month total</span>
+            <span className="text-3xl font-extrabold tracking-tight">{currency(breakdown.grandTotalFirstMonth)}</span>
           </div>
 
-          <p className="text-xs text-gray-500 mt-3">Disclaimer: This is a non‑binding estimate. Adjust formulas in code to reflect your rates and scope.</p>
+          <p className="text-xs text-gray-500 mt-4">Disclaimer: This is a non‑binding estimate. Adjust formulas to reflect your own rates & scope.</p>
         </aside>
 
         <footer className="lg:col-span-2 text-center text-sm text-gray-500 pt-2">
           <p>
-            Built as an Odoo calculator look‑alike for demo purposes.
-            Replace the formula constants (RATES) with your own logic.
+            Built as an Odoo‑style calculator demo. You can theme it further via Tailwind config (use brand purple accents).
           </p>
         </footer>
       </div>
