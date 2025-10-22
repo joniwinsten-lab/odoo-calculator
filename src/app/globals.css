@@ -1,26 +1,79 @@
-@import "tailwindcss";
+/* Tailwind base */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+/* Perusfontti ja smooth rendering (valinnainen) */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
+}
+html, body {
+  padding: 0;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* -----------------------------
+   Dark “watery” moving background
+   ----------------------------- */
+.bg-wave-dark {
+  position: relative;
+  min-height: 100vh;
+  background: radial-gradient(1200px 800px at 10% 10%, #2a2a2a 0%, #1a1a1a 40%, #121212 100%);
+  overflow: hidden;
+  isolation: isolate; /* keeps pseudo-elements behind content */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* moving soft highlight (like water shimmer) */
+.bg-wave-dark::before {
+  content: "";
+  position: absolute;
+  inset: -50% -50%;
+  background:
+    radial-gradient(60% 40% at 30% 30%, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.00) 60%),
+    radial-gradient(50% 50% at 70% 60%, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.00) 60%),
+    radial-gradient(40% 60% at 20% 80%, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.00) 60%);
+  animation: waveMove 22s linear infinite;
+  z-index: -2;
+  transform: translateZ(0);
+}
+
+/* subtle vignette/overlay to keep content legible */
+.bg-wave-dark::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(70% 60% at 50% 40%, rgba(0,0,0,0.20) 0%, rgba(0,0,0,0.55) 100%);
+  z-index: -1;
+}
+
+/* Motion keyframes */
+@keyframes waveMove {
+  0%   { transform: translate(-12%, -12%) scale(1.00) rotate(0deg); }
+  25%  { transform: translate(-16%, -15%) scale(1.04) rotate(2deg); }
+  50%  { transform: translate(-20%, -18%) scale(1.07) rotate(0deg); }
+  75%  { transform: translate(-16%, -15%) scale(1.04) rotate(-2deg); }
+  100% { transform: translate(-12%, -12%) scale(1.00) rotate(0deg); }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .bg-wave-dark::before {
+    animation: none;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* -----------------------------
+   “Glass card” helper class
+   (voit käyttää tätä lyhentämään className-ketjuja)
+   ----------------------------- */
+.glass {
+  @apply rounded-3xl border border-white/10 bg-white/10 backdrop-blur-md;
+}
+
+/* Form elements on dark bg */
+input[type="number"], input[type="text"], select {
+  color-scheme: dark;
 }
